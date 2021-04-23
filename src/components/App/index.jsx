@@ -1,3 +1,4 @@
+/* eslint-disable no-shadow */
 import React, { useState } from 'react';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import styled from 'styled-components';
@@ -225,6 +226,7 @@ const App = () => {
           const withAddItem = addItem(
             item.cards,
             result.destination.index,
+            // eslint-disable-next-line comma-dangle
             removed
           );
           return { ...item, cards: withAddItem };
@@ -236,10 +238,12 @@ const App = () => {
 
     if (result.destination.droppableId !== result.source.droppableId) {
       const [sourceList] = cards.filter(
+        // eslint-disable-next-line comma-dangle
         (i) => i.list === result.source.droppableId
       );
       const [removed] = removeItem(sourceList.cards, result.source.index);
       const [destList] = cards.filter(
+        // eslint-disable-next-line comma-dangle
         (i) => i.list === result.destination.droppableId
       );
       const newArr = cards.map((item) => {
@@ -266,16 +270,20 @@ const App = () => {
               {(provided, snapshot) => (
                 <List
                   ref={provided.innerRef}
+                  // eslint-disable-next-line react/jsx-props-no-spreading
                   {...provided.droppableProps}
                   isDraggingOver={snapshot.isDraggingOver}
                 >
                   <HeadList>{item.title}</HeadList>
                   {item.cards.map((i, index) => (
+                    // eslint-disable-next-line react/jsx-no-comment-textnodes
                     <Draggable key={i.id} draggableId={i.id} index={index}>
                       {(provided, snapshot) => (
                         <Card
                           ref={provided.innerRef}
+                          // eslint-disable-next-line react/jsx-props-no-spreading
                           {...provided.draggableProps}
+                          // eslint-disable-next-line react/jsx-props-no-spreading
                           {...provided.dragHandleProps}
                           isDragging={snapshot.isDragging}
                         >
